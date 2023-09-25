@@ -34,7 +34,7 @@ opt.termencoding = "utf-8"
 vim.o.clipboard = "unnamedplus"
 vim.g.molokai_original = 1
 vim.cmd([[
-	colorscheme molokai
+	colorscheme deep_teal_sea
 	set listchars=tab:>·,trail:~,extends:>,precedes:<,space:·
 	set list
 	" 4 spaces indentation
@@ -62,6 +62,7 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 vim.api.nvim_set_keymap('n', 'nt', ':NERDTreeToggle<CR>', {})
 vim.api.nvim_set_keymap('n', 'fn', ':Telescope find_files<CR>', {})
 vim.api.nvim_set_keymap('n', 'ft', ':Telescope live_grep<CR>', {})
+vim.api.nvim_set_keymap('n', 'nc', ':ColorizerReloadAllBuffers<CR>', {})
 
 -- Omnisharp key maps
 vim.api.nvim_set_keymap('n', '<F12>', ':OmniSharpGotoDefinition tabedit<CR>', {})
