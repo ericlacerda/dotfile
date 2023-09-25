@@ -1,0 +1,104 @@
+{
+    "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+    "palette": {
+        "Deep-Teal-Sea-5": "#F2E3D5",
+        "Deep-Teal-Sea-1": "#012E40",
+        "Deep-Teal-Sea-3": "#026773",
+        "Deep-Teal-Sea-4": "#3CA6A6",
+        "Deep-Teal-Sea-2": "#024959",
+        "Deep-Teal-Sea-rotative-1": "#012E40",
+        "Deep-Teal-Sea-rotative-2": "#3CA6A6",
+        "Deep-Teal-Sea-rotative-3": "#026773"
+    },
+    "blocks": [
+        {
+            "alignment": "left",
+            "segments": [
+                {
+                    "type": "text",
+                    "style": "diamond",
+                    "leading_diamond": "\ue0b6",
+                    "foreground": "p:Deep-Teal-Sea-5",
+                    "background": "p:Deep-Teal-Sea-1",
+                    "template": "{{ if .Env.PNPPSHOST }} \uf8c5 {{ .Env.PNPPSHOST }} {{ end }}"
+                },
+                {
+                    "type": "text",
+                    "style": "powerline",
+                    "foreground": "p:Deep-Teal-Sea-5",
+                    "background": "p:Deep-Teal-Sea-3",
+                    "powerline_symbol": "\ue0b0",
+                    "template": "{{ if .Env.PNPPSSITE }} \uf2dd {{ .Env.PNPPSSITE }}{{ end }}"
+                },
+                {
+                    "type": "text",
+                    "style": "diamond",
+                    "trailing_diamond": "\ue0b4",
+                    "foreground": "p:Deep-Teal-Sea-5",
+                    "background": "p:Deep-Teal-Sea-3",
+                    "template": "{{ if .Env.PNPPSSITE }}\u00a0{{ end }}"
+                }
+            ],
+            "type": "rprompt"
+        },
+        {
+            "alignment": "left",
+            "segments": [
+                {
+                    "background": "p:Deep-Teal-Sea-4",
+                    "foreground": "p:Deep-Teal-Sea-5",
+                    "leading_diamond": "\ue0b6",
+                    "style": "diamond",
+                    "template": "{{ .UserName }} ",
+                    "type": "session"
+                },
+                {
+                    "background": "p:Deep-Teal-Sea-2",
+                    "foreground": "p:Deep-Teal-Sea-5",
+                    "powerline_symbol": "\ue0b0",
+                    "properties": {
+                        "style": "folder"
+                    },
+                    "style": "powerline",
+                    "template": " {{ .Path }} ",
+                    "type": "path"
+                },
+                {
+                    "background": "p:Deep-Teal-Sea-rotative-1",
+                    "foreground": "p:Deep-Teal-Sea-5",
+                    "powerline_symbol": "\ue0b0",
+                    "properties": {
+                        "fetch_stash_count": true,
+                        "fetch_status": false,
+                        "fetch_upstream_icon": true
+                    },
+                    "style": "powerline",
+                    "template": " \u279c ({{ .UpstreamIcon }}{{ .HEAD }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}) ",
+                    "type": "git"
+                },
+                {
+                    "background": "p:Deep-Teal-Sea-rotative-2",
+                    "foreground": "p:Deep-Teal-Sea-5",
+                    "powerline_symbol": "\ue0b0",
+                    "style": "powerline",
+                    "template": " \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
+                    "type": "node"
+                },
+                {
+                    "background": "p:Deep-Teal-Sea-3_blue",
+                    "foreground": "p:Deep-Teal-Sea-5",
+                    "properties": {
+                        "time_format": "15:04"
+                    },
+                    "style": "diamond",
+                   "template": "{{ if eq .Env.DAYTIME \"day\" }} \uF185 {{ else }} \uF186 {{ end }} {{ .CurrentDate | date .Format }}",
+                    "trailing_diamond": "\ue0b0",
+                    "type": "time"
+                }
+            ],
+            "type": "prompt"
+        }
+    ],
+    "final_space": true,
+    "version": 2
+}
