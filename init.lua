@@ -1,6 +1,7 @@
 vim.o.termguicolors = true
 require "paq" {
     "savq/paq-nvim";
+    "sbdchd/neoformat";
     "OmniSharp/omnisharp-vim";
     "preservim/nerdtree";
     "dense-analysis/ale";
@@ -21,6 +22,7 @@ local colorizer = require('colorizer').setup()
 local wo = vim.wo
 local g = vim.g
 local opt = vim.opt
+
 
 wo.number = true -- show line numbers
 g.OmniSharp_server_use_net6 = 1
@@ -52,12 +54,19 @@ vim.cmd([[
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1):
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+" use <cr> to select completion
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+
+" Use <Tab> and <S-Tab> to navigate the completion list
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+inoremap <expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+inoremap <expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
 ]])
+
 
 vim.api.nvim_set_keymap('n', 'nt', ':NERDTreeToggle<CR>', {})
 vim.api.nvim_set_keymap('n', 'fn', ':Telescope find_files<CR>', {})
@@ -68,7 +77,7 @@ vim.api.nvim_set_keymap('n', 'nc', ':ColorizerReloadAllBuffers<CR>', {})
 vim.api.nvim_set_keymap('n', '<F12>', ':OmniSharpGotoDefinition tabedit<CR>', {})
 vim.api.nvim_set_keymap('n', '<c-r><c-r>', ':OmniSharpRename<CR>', {})
 vim.api.nvim_set_keymap('n', 'action', ':OmniSharpGetCodeActions<CR>', {})
-vim.api.nvim_set_keymap('n', '<c-k><c-d>', ':OmniSharpCodeFormat<CR>', {})
+vim.api.nvim_set_keymap('n', '<c-f>', ':OmniSharpCodeFormat<CR>', {})
 vim.api.nvim_set_keymap('n', '<s-F12>', ':OmniSharpFindUsages<CR>', {});
 -- Find usages above uses the quickfix window, you can close it by :ccl
 -- or go to the next error by :cn or previous by :cp
@@ -107,7 +116,6 @@ dap.configurations.cs = {
     end,
   },
 }
-
 
 
 
